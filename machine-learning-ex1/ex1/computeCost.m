@@ -13,9 +13,13 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+%% cost function J(theta) = (1/2m) sum_i=1_m(h_theta(x^i)-y(i)^2)
 
+%% given X (features), y (actual results), theta (parameters)
 
+h_theta = X * theta
 
+J = (1 / 2 * m) 
 
 % =========================================================================
 
