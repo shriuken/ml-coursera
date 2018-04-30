@@ -17,11 +17,18 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
+    %% need partial derivative of the cost function.
 
+    %% partial deriv 1: (1/m) sum(h_theta-y)
+    %% partial deriv 2: (1/m) sum( (h_theta-y)*x(i) )
 
+    heta = X * theta;
+    difference = heta - y;
 
-
-
+    pd1 = sum(difference);
+    pd2 = sum(difference .* X(:, 2));
+    constant = alpha / m;
+    theta = theta - constant * [pd1; pd2];
 
     % ============================================================
 

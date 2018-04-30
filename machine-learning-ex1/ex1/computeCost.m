@@ -15,11 +15,12 @@ J = 0;
 
 %% cost function J(theta) = (1/2m) sum_i=1_m(h_theta(x^i)-y(i)^2)
 
-%% given X (features), y (actual results), theta (parameters)
+%% given X (features) Nx2
+%% y (actual results) Nx1
+%% heta (parameters)  2x1AQ
 
-h_theta = X * theta
-
-J = (1 / 2 * m) 
+h_theta = X * theta;
+J = (1 / 2 / m) * sum((h_theta-y).^2);
 
 % =========================================================================
 
