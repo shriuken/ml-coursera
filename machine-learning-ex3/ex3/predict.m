@@ -22,9 +22,22 @@ p = zeros(size(X, 1), 1);
 %
 
 
-
-
-
+X = [ones(m, 1) X];
+% Theta1 = [ones(1, size(Theta1, 2)); Theta1]; 
+% X       5000  x 401
+% Theta1  25    x 401
+% Theta2  10    x 26
+z2 = X * Theta1';
+a2 = [ones(m, 1) sigmoid(z2)];
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+[vals, p] = max(a3, [], 2);
+% z3 = [ones(m, 1) z2] * 
+% size(hiddenLayer1)
+% hiddenLayer1 = [ones(m, 1) hiddenLayer1]; % 5000 x 26
+% size(hiddenLayer1)
+% output = hiddenLayer1 * Theta2'; % 5000 x 10
+% [vals, p] =  max(output, [], 2);
 
 
 
