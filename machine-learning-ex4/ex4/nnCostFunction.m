@@ -62,9 +62,9 @@ for row=1:1:m
 end
 
 J = (1 / m) * sum(sum( -y_matrix .* log((h_theta)) - (1 .- y_matrix) .* log(1 .- h_theta)));
-
+regConstant = (lambda / (2 * m)) * (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 % Adding regularization term
-J = J + (lambda / (2 * m)) * (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)))
+J = J + regConstant;
 
 %
 % Part 2: Implement the backpropagation algorithm to compute the gradients
