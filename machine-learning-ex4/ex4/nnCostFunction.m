@@ -43,17 +43,11 @@ Theta2_grad = zeros(size(Theta2));
 % J(theta) = (1 / m) *
 %               sum(i=1, m)[sum(k=1, K)[-y_k^(i) * log((h_theta(x^i))_k) - (1-y_k^i) * log(1 - (h_theta(x^i))_k)]]
 
-% size(Theta1_grad) % 25 x 401
-% size(Theta2_grad) % 10 x 26
-% size(X) % 5000 x 400
-% size(y) % 5000 x 1
-
 a1 = [ones(size(X, 1), 1) X]; % 5000 x 401
 z2 = a1 * Theta1'; % 5000 x 25 
 a2 = [ones(m, 1) sigmoid(z2)]; % 5000 x 26
 z3 = a2 * Theta2'; % 5000 x 10
 h_theta = sigmoid(z3); % 5000 x 10
-
 
 % need to turn y into a 5000 x 10 where the initial value of y becomes that column's 1 value.
 y_matrix = zeros(size(y, 1), num_labels);
@@ -81,6 +75,29 @@ J = J + regConstant;
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+%
+
+% size(Theta1_grad) % 25 x 401
+% size(Theta2_grad) % 10 x 26
+% size(X) % 5000 x 400
+% size(y) % 5000 x 1
+
+a3 = h_theta; % assigning into a3 for naming's sake.
+
+d3 = a3 .- y_matrix; % 5000 x 10
+d2 = d3 * Theta2 .* sigmoidGradient([ones(m, 1) z2]);
+
+% size(d2(:, 2:end)) 5000 x 25
+
+% my a1 is 5000 x 401; X is 5000 x 400
+
+Theta1_grad = (1 / m) .* ( d2(:, 2:end)' * a1 );
+Theta2_grad = (1 / m) .* ( d3' * a2 );
+
+for t = 1:m
+
+end
+
 %
 % Part 3: Implement regularization with the cost function and gradients.
 %
