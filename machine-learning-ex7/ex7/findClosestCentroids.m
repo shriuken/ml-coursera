@@ -21,11 +21,15 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+% c(i) is idx(i), and idx(i) = j, s.t. ||x(i) - u(j)|| is minimized
+% idx = m x 1, X = m x 2 and the values of idx are [1... length(centroids)]
+% centroids = k x 2
 
-
-
-
-
+for i=1:size(X, 1)
+  sq_va = (X(i, :) - centroids).^2;
+  distances = sqrt(sum(sq_va, 2));
+  idx(i) = find(distances == min(distances));
+end
 
 % =============================================================
 
