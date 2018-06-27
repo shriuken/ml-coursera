@@ -40,16 +40,27 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+% R(Row, :) = Row index = user. R(:, Col) = col index = movie.
 
+fx = ((X * Theta') - Y) .* R;
 
+J = (1 / 2 ) * sum(sum(fx .^2)) + (lambda / 2) * (sum(sum(Theta.^2)) + sum(sum(X.^2)));
 
+% size(X) % 5 x 3
+% size(Theta) % 4 x 3
+% size(R) % 5 x 4 R(i,j) = 1 if ith movie rated by j-thuser
+% size(fx) % 5 x 4
+%                       fx is 
+% 5 x 3                 Each row of Theta is a user. Each column is a feature.
 
+for x=1:num_movies
+  idx = find(R(x,:) == 1);
+  Theta_tmp = Theta(idx, :); Y_tmp = Y(x, idx);
+  X_grad(x, :) = (X(x, :) * Theta_tmp' - Y_tmp)*Theta_tmp;
+end
 
-
-
-
-
-
+X_grad = X_grad + lambda*X;
+Theta_grad = fx' * X + lambda*Theta;
 
 
 
